@@ -1,0 +1,23 @@
+##ignore this file##
+/target/ 
+/.idea/
+.classpath
+.project
+.settings      
+ ##filter databfile¡¢sln file##
+*.mdb  
+*.ldb  
+*.sln    
+##class file##
+*.com  
+*.class  
+
+# compression file
+*.7z  
+*.dmg  
+*.gz  
+*.iso  
+*.jar  
+*.rar  
+*.tar  
+*.zip  

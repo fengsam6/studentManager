@@ -1,0 +1,102 @@
+body {
+	margin: 0 0;
+	padding: 0 0;
+	font: 14px Helvetica Neue, Helvetica, PingFang SC, \5FAE\8F6F\96C5\9ED1, Tahoma, Arial, sans-serif;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+	padding: 0 15px;
+}
+
+.description {
+	margin: 10px 0;
+	height: 14px;
+	line-height: 18px;
+}
+
+.main {
+	margin: 20px 0;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.title1 {
+	font-size: 24px;
+}
+
+.title2 {
+	font-size: 18px;
+	padding-left: 4px;
+}
+
+.title3 {
+	font-size: 16px;
+	padding-left: 30px;
+}
+
+.title4 {
+	font-size: 14px;
+	padding-left: 50px;
+}
+
+/* p{margin:8px 5px}  */
+
+.content {
+	margin: 0 18px;
+}
+
+p {
+	margin: 0 auto;
+	height: auto;
+	font-size: 14px;
+	line-height: 18px;
+	text-indent: 2em;
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
+}
+
+.column-center {
+	width: 1240px;
+	margin: 0 auto;
+}
+
+.block {
+	display: block;
+}
+
+.sign {
+	font-size: 16px;
+	font-weight: 700;
+	position: fixed;
+	bottom: 4px;
+	right: 190px;
+}
+
+.sign .num {
+	margin-left: 20px;
+}
+
+.copyRight {
+	margin-left: 120px;
+}
+
+.content {
+	font-size: 14px;
+}
+
+.book {
+	float: right;
+	clear: both;
+}
+
+.book img {
+	width: 200px;
+	height: 270px;
+}

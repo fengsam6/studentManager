@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.feng.dao.StudentMapper">
+
+
+    <resultMap id="studentInfoMap" type="cn.feng.entity.StudentInfo">
+        <id column="id" property="id"/>
+        <result column="student_name" property="studentName"/>
+        <result column="student_num" property="studentNum"/>
+        <result column="gender" property="gender"/>
+        <result column="enter_school_time" property="enterSchoolTime"/>
+        <result column="major" property="major"/>
+        <result  column="phone" property="phone"/>
+        <result column="major" property="major"/>
+        <association property="classObj"  javaType="cn.feng.entity.Class">
+            <id  column="class_id" property="id"/>
+            <result column="class_name" property="className" />
+            <result column="comment" property="comment" />
+        </association>
+        <association property="school"  javaType="cn.feng.entity.School">
+            <id  column="school_id" property="schoolId"/>
+            <result column="school_name" property="schoolName" />
+        </association>
+    </resultMap>
+
+    <select id="listStudentInfo" resultMap="studentInfoMap">
+        SELECT * from view_studentInfo
+    </select>
+
+</mapper>
