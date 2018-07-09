@@ -1,5 +1,6 @@
 ##ignore this file##
 /target/ 
+/out/ 
 /.idea/
 .classpath
 .project
