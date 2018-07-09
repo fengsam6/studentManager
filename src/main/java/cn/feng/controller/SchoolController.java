@@ -22,8 +22,8 @@ public class SchoolController {
     private SchoolService schoolService;
 
     @RequestMapping("/list.html")
-    public String listPage(Integer pageSize, Integer pageNum, School school, Model model) {
-        PageInfo<School> schoolPageInfo = schoolService.listPage(pageSize, pageNum, school);
+    public String listPage(Integer pageNum, Integer pageSize, School school, Model model) {
+        PageInfo<School> schoolPageInfo = schoolService.listPage(pageNum, pageSize, school);
         model.addAttribute("schoolPageInfo", schoolPageInfo);
         return "/manager/school/list";
     }
@@ -34,9 +34,9 @@ public class SchoolController {
     }
 
     @RequestMapping("/edit.html")
-    public String editPage(Integer schoolId,Model model) {
-       School school = schoolService.selectById(schoolId);
-       model.addAttribute("schoolModel",school);
+    public String editPage(Integer schoolId, Model model) {
+        School school = schoolService.selectById(schoolId);
+        model.addAttribute("schoolModel", school);
         return "/manager/school/edit";
     }
 
@@ -56,13 +56,13 @@ public class SchoolController {
     @RequestMapping("/delete")
     public JsonResult delete(Integer id) {
         schoolService.deleteById(id);
-        return JsonResult.renderSuccess("删除学校成功！",id);
+        return JsonResult.renderSuccess("删除学校成功！", id);
     }
 
     @ResponseBody
     @RequestMapping("/update")
     public JsonResult update(School school) {
         schoolService.update(school);
-        return JsonResult.renderSuccess("更新学校成功！",school.getSchoolId());
+        return JsonResult.renderSuccess("更新学校成功！", school.getSchoolId());
     }
 }

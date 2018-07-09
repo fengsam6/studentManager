@@ -23,14 +23,14 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, Role> implement
 
     @Override
     public void add(Role role) {
-        Assert.hasText(role.getRoleName(),"");
+        Assert.hasText(role.getRoleName(),"角色名称不能为空");
         roleMapper.insert(role);
     }
 
     @Override
     public void update(Role role) {
-        Assert.notNull(role.getId(),"");
-        Assert.hasText(role.getRoleName(),"");
+        Assert.notNull(role.getId(),"角色id不能为空");
+        Assert.hasText(role.getRoleName(),"角色名称不能为空");
         roleMapper.updateById(role);
     }
 

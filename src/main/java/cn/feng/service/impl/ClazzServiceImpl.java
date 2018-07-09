@@ -4,8 +4,11 @@ import cn.feng.dao.ClassMapper;
 import cn.feng.entity.Class;
 import cn.feng.service.ClazzService;
 import cn.feng.service.support.BaseServiceImpl;
+import cn.feng.util.CommonUtil;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -19,20 +22,22 @@ public class ClazzServiceImpl extends BaseServiceImpl<ClassMapper, Class> implem
 
     @Override
     public List<Class> list() {
-       List<Class> classList = classMapper.selectList(null);
-        for(Class aClass : classList){
-            System.out.println(aClass.toString());
-        }
+        EntityWrapper<Class> classObj = new EntityWrapper<Class>();
+       List<Class> classList = classMapper.selectList(classObj);
         return classList;
     }
 
     @Override
-    public void add(Class aClass) {
-        classMapper.insert(aClass);
+    public void add(Class classObj) {
+        Assert.hasText(classObj.getClassName(),"班级名称不能为空");
+        classObj.setCreateTime(CommonUtil.getSystemDate());
+        classMapper.insert(classObj);
     }
 
     @Override
-    public void update(Class aClass) {
-        classMapper.updateById(aClass);
+    public void update(Class classObj) {
+        Assert.notNull(classObj.getId(),"班级id不能为空");
+        Assert.hasText(classObj.getClassName(),"班级名称不能为空");
+        classMapper.updateById(classObj);
     }
 }

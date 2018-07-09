@@ -31,20 +31,31 @@ public class StudentController {
 
     @RequestMapping("/list.html")
     public String listPage(Integer pageSize, Integer pageNum, Student student, Model model) {
-        PageInfo<Student> studentPageInfo = studentService.listPage(pageSize, pageNum, student);
+        PageInfo<Student> studentPageInfo = studentService.listPage(pageNum, pageSize, student);
         model.addAttribute("studentPageInfo", studentPageInfo);
         List<Class> classList = clazzService.selectList(null);
         model.addAttribute("classListModel", classList);
         return "/manager/student/list";
     }
+
     @RequestMapping("/listStudentInfo.html")
-    public String listStudentInfoPage(Integer pageSize, Integer pageNum, Student student, Model model) {
-        PageInfo<StudentInfo> studentPageInfo = studentService.listStudentInfoPage(pageSize, pageNum);
+    public String listStudentInfoPage(Integer pageSize, Integer pageNum, Model model) {
+        PageInfo<StudentInfo> studentPageInfo = studentService.listStudentInfoPage(pageNum, pageSize);
         model.addAttribute("studentPageInfo", studentPageInfo);
         List<Class> classList = clazzService.list();
         model.addAttribute("classListModel", classList);
         return "/manager/student/list";
     }
+
+    @RequestMapping("/listStudentInfoPageByProc.html")
+    public String listStudentInfoPageByProc(Integer pageSize, Integer pageNum, Model model) {
+        PageInfo<StudentInfo> studentPageInfo = studentService.listPageByProc(pageNum, pageSize);
+        model.addAttribute("studentPageInfo", studentPageInfo);
+        List<Class> classList = clazzService.list();
+        model.addAttribute("classListModel", classList);
+        return "/manager/student/list";
+    }
+
     @RequestMapping("/add.html")
     public String addPage(Model model) {
         List<Class> classList = clazzService.list();
@@ -56,7 +67,7 @@ public class StudentController {
 
     @RequestMapping("/edit.html")
     public String editPage(Integer studentId, Model model) {
-        Student student =  studentService.selectById(studentId);
+        Student student = studentService.selectById(studentId);
         model.addAttribute("studentModel", student);
         List<Class> classList = clazzService.list();
         model.addAttribute("classListModel", classList);
@@ -81,13 +92,13 @@ public class StudentController {
     @RequestMapping("/delete")
     public JsonResult delete(Integer id) {
         studentService.deleteById(id);
-        return JsonResult.renderSuccess("删除学生成功！",id);
+        return JsonResult.renderSuccess("删除学生成功！", id);
     }
 
     @ResponseBody
     @RequestMapping("/update")
     public JsonResult update(Student student) {
         studentService.update(student);
-        return JsonResult.renderSuccess("更新学生成功！",student.getId());
+        return JsonResult.renderSuccess("更新学生成功！", student.getId());
     }
 }

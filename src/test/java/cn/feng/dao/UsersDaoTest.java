@@ -1,6 +1,7 @@
 package cn.feng.dao;
 
 import cn.feng.entity.User;
+import cn.feng.entity.UserInfo;
 import cn.feng.util.CommonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import java.util.List;
 @ContextConfiguration(locations = {"classpath:spring/spring-mybatis.xml"})
 public class UsersDaoTest {
     @Autowired
-    private UserMapper usersDao;
+    private UserMapper userMapper;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
@@ -29,7 +30,7 @@ public class UsersDaoTest {
         user.setPassword("123456");
         user.setRoleId(1);
         user.setCreateTime(CommonUtil.getSystemDate("yyyy-MM-dd HH:mm:ss"));
-        usersDao.addUser(user);
+        userMapper.addUser(user);
     }
 
     @Test
@@ -38,17 +39,24 @@ public class UsersDaoTest {
 
     @Test
     public void findUsersById() throws Exception {
-        User user = usersDao.getUsersById(1);
+        User user = userMapper.getUsersById(1);
         System.out.println(user.toString());
         logger.info("{}", user);
     }
 
     @Test
     public void list() throws Exception {
-        List<User> userList = usersDao.selectList(null);
+        List<User> userList = userMapper.selectList(null);
         for (User user : userList){
             logger.info("{}",user.toString());
         }
     }
 
+    @Test
+    public void userInfoTest(){
+
+        List<UserInfo> studentInfoList = userMapper.listUserInfo(null);
+        for (UserInfo userInfo : studentInfoList)
+            logger.debug("测试学生{}",userInfo.toString());
+    }
 }

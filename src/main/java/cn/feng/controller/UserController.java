@@ -7,6 +7,7 @@ import cn.feng.entity.User;
 import cn.feng.entity.UserInfo;
 import cn.feng.service.RoleService;
 import cn.feng.service.UserService;
+import cn.feng.util.CommonUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,9 @@ public class UserController {
         model.addAttribute("pageInfoModel", pageInfo);
         return "/manager/user/list";
     }
-    @RequestMapping("/listUserIfo.html")
-    public String listUserIfoPage(Integer pageSize, Integer pageNum, User user, Model model) {
-        PageInfo<UserInfo> pageInfo = userService.listUserInfoPage(pageSize, pageNum, user);
+    @RequestMapping("/listUserInfo.html")
+    public String listUserInfoPage(Integer pageNum, Integer pageSize , User user, Model model) {
+        PageInfo<UserInfo> pageInfo = userService.listUserInfoPage(pageNum, pageSize, user);
         model.addAttribute("pageInfoModel", pageInfo);
         return "/manager/user/list";
     }
@@ -90,7 +91,12 @@ public class UserController {
     @RequestMapping("/login")
     public JsonResult login(User user, HttpServletRequest request) {
         User loginUser = userService.login(user);
+       Role role = roleService.selectById(loginUser.getRoleId());
+        request.getSession().setAttribute("userRole", role);
         request.getSession().setAttribute("loginUser", loginUser);
+        //修改登录时间
+        loginUser.setLastLoginTime(CommonUtil.getSystemDate("yyyy年MM月 hh:mm:ss"));
+        userService.update(loginUser);
         return JsonResult.renderSuccess("登录成功！", user);
     }
 
@@ -98,6 +104,6 @@ public class UserController {
     @RequestMapping("/logout")
     public JsonResult logout(User user, HttpServletRequest request) {
       request.getSession().invalidate();
-        return JsonResult.renderSuccess("登录成功！", user);
+        return JsonResult.renderSuccess("退出成功！", user);
     }
 }

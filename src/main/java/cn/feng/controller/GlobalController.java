@@ -26,7 +26,17 @@ public class GlobalController {
         return "/error";
     }
 
-    @RequestMapping(value = {"/login.html","/login"})
+    @RequestMapping(path = "/businessError.html")
+    public String businessErrorPage() {
+        return "/businessError";
+    }
+
+    @RequestMapping(path = "/illegalArgumentError.html")
+    public String illegalArgumentErrorPage() {
+        return "/illegalArgumentError";
+    }
+
+    @RequestMapping(value = {"/login.html", "/login"})
     public String loginPage() {
         return "/login";
     }

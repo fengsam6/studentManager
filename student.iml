@@ -4,9 +4,7 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-ehcache.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-kaptcha.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-shiro.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-mvc.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-mybatis.xml</file>
@@ -74,5 +72,8 @@
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.6" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.10" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.7" level="project" />
   </component>
 </module>

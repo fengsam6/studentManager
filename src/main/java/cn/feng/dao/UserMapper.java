@@ -60,5 +60,8 @@ public interface UserMapper extends BaseMapper<User>{
     void deleteUser(int id);
 
 
-    List<UserInfo> listUserInfo();
+    List<UserInfo> listUserInfo(User user);
+
+
+    List<UserInfo> getUserInfoByProc();
 }

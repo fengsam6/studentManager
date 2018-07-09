@@ -4,6 +4,7 @@ import cn.feng.dao.SchoolMapper;
 import cn.feng.entity.School;
 import cn.feng.service.SchoolService;
 import cn.feng.service.support.BaseServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,14 +31,11 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolMapper, School> imp
             pageNum = 1;
         }
         if (pageSize == null) {
-            pageSize = 30;
+            pageSize = 10;
         }
         PageHelper.startPage(pageNum, pageSize);
-        Map<String, Object> map = new HashMap<>();
-//        map.put("class_name",schoolSearch.getClassName());
-        map.put("school_id", schoolSearch.getSchoolId());
         //紧跟着的第一个select方法会被分页
-        List<School> list = schoolMapper.selectByMap(map);
+        List<School> list = schoolMapper.selectList(new EntityWrapper<>(schoolSearch));
         /* 用PageInfo对结果进行包装 */
         return new PageInfo<>(list);
     }

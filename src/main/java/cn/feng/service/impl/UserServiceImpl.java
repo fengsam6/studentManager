@@ -53,13 +53,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             pageNum = 1;
         }
         if (pageSize == null) {
-            pageSize = 30;
+            pageSize = 10;
         }
         PageHelper.startPage(pageNum, pageSize);
-        Map<String, Object> map = new HashMap<>();
-        map.put("role_id", userSearch.getRoleId());
         //紧跟着的第一个select方法会被分页
-        List<UserInfo> list = userMapper.listUserInfo();
+        List<UserInfo> list = userMapper.listUserInfo(userSearch);
         /* 用PageInfo对结果进行包装 */
         return new PageInfo<>(list);
     }

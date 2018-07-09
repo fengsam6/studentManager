@@ -26,8 +26,6 @@ public class ClassController {
     public String listPage(Model model) {
         List<Class> classList = clazzService.list();
         model.addAttribute("classListModel", classList);
-
-
         return "/manager/class/list";
     }
 
@@ -37,8 +35,8 @@ public class ClassController {
     }
 
     @RequestMapping("/edit.html")
-    public String editPage(Integer classObjId, Model model) {
-        Class classObj =  clazzService.selectById( classObjId);
+    public String editPage(Integer classId, Model model) {
+        Class classObj =  clazzService.selectById( classId);
         model.addAttribute("classObjModel", classObj);
         return "/manager/class/edit";
     }

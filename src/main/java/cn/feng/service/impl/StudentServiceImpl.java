@@ -5,6 +5,7 @@ import cn.feng.entity.Student;
 import cn.feng.entity.StudentInfo;
 import cn.feng.service.StudentService;
 import cn.feng.service.support.BaseServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -36,13 +37,26 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentMapper, Student> 
             pageNum = 1;
         }
         if (pageSize == null) {
-            pageSize = 30;
+            pageSize = 10;
         }
         PageHelper.startPage(pageNum, pageSize);
-        Map<String, Object> map = new HashMap<>();
-        map.put("student_id", studentSearch.getId());
-        //紧跟着的第一个select方法会被分页
-        List<Student> list = studentMapper.selectByMap(map);
+        List<Student> list = studentMapper.selectList(new EntityWrapper<>(studentSearch));
+        /* 用PageInfo对结果进行包装 */
+        return new PageInfo<>(list);
+    }
+
+    @Override
+    public PageInfo<StudentInfo> listPageByProc(Integer pageNum, Integer pageSize) {
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        if (pageSize == null) {
+            pageSize = 10;
+        }
+        PageHelper.startPage(pageNum, pageSize);
+
+//        紧跟着的第一个select方法会被分页
+        List<StudentInfo> list = studentMapper.getStudentInfoByProc();
         /* 用PageInfo对结果进行包装 */
         return new PageInfo<>(list);
     }
@@ -53,7 +67,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentMapper, Student> 
             pageNum = 1;
         }
         if (pageSize == null) {
-            pageSize = 30;
+            pageSize = 10;
         }
         PageHelper.startPage(pageNum, pageSize);
 
