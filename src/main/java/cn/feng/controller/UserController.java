@@ -1,6 +1,7 @@
 package cn.feng.controller;
 
 
+import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.JsonResult;
 import cn.feng.entity.Role;
 import cn.feng.entity.User;
@@ -68,6 +69,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @SysLog("添加用户")
     public JsonResult add(User user) {
         userService.add(user);
         return JsonResult.renderSuccess("添加用户成功！");
@@ -75,6 +77,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/delete")
+    @SysLog("删除用户")
     public JsonResult delete(Integer userId) {
         userService.deleteById(userId);
         return JsonResult.renderSuccess("删除用户成功！");
@@ -82,6 +85,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/update")
+    @SysLog("更新用户")
     public JsonResult update(User user) {
         userService.update(user);
         return JsonResult.renderSuccess("更新用户成功！");
@@ -89,6 +93,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/login")
+    @SysLog("用户登录")
     public JsonResult login(User user, HttpServletRequest request) {
         User loginUser = userService.login(user);
        Role role = roleService.selectById(loginUser.getRoleId());
@@ -102,6 +107,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/logout")
+    @SysLog("用户退出登录")
     public JsonResult logout(User user, HttpServletRequest request) {
       request.getSession().invalidate();
         return JsonResult.renderSuccess("退出成功！", user);

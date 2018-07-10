@@ -66,7 +66,7 @@
                         </dl>
                     </li>
 
-                    <%--<li class="layui-nav-item"><a href="">日志管理</a></li>--%>
+                    <li class="layui-nav-item"><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/systemLog/list.html">日志管理</a></li>
                 </c:if>
 
             </ul>

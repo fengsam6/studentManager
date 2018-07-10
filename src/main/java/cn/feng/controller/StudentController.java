@@ -1,6 +1,7 @@
 package cn.feng.controller;
 
 
+import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.*;
 import cn.feng.entity.Class;
 import cn.feng.service.ClazzService;
@@ -30,7 +31,7 @@ public class StudentController {
     private SchoolService schoolService;
 
     @RequestMapping("/list.html")
-    public String listPage(Integer pageSize, Integer pageNum, Student student, Model model) {
+    public String listPage(Integer pageNum, Integer pageSize, Student student, Model model) {
         PageInfo<Student> studentPageInfo = studentService.listPage(pageNum, pageSize, student);
         model.addAttribute("studentPageInfo", studentPageInfo);
         List<Class> classList = clazzService.selectList(null);
@@ -47,14 +48,6 @@ public class StudentController {
         return "/manager/student/list";
     }
 
-    @RequestMapping("/listStudentInfoPageByProc.html")
-    public String listStudentInfoPageByProc(Integer pageSize, Integer pageNum, Model model) {
-        PageInfo<StudentInfo> studentPageInfo = studentService.listPageByProc(pageNum, pageSize);
-        model.addAttribute("studentPageInfo", studentPageInfo);
-        List<Class> classList = clazzService.list();
-        model.addAttribute("classListModel", classList);
-        return "/manager/student/list";
-    }
 
     @RequestMapping("/add.html")
     public String addPage(Model model) {
@@ -83,6 +76,7 @@ public class StudentController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @SysLog("添加学生")
     public JsonResult add(Student student) {
         studentService.add(student);
         return JsonResult.renderSuccess("添加学生成功！");
@@ -90,6 +84,7 @@ public class StudentController {
 
     @ResponseBody
     @RequestMapping("/delete")
+    @SysLog("删除学生")
     public JsonResult delete(Integer id) {
         studentService.deleteById(id);
         return JsonResult.renderSuccess("删除学生成功！", id);
@@ -97,6 +92,7 @@ public class StudentController {
 
     @ResponseBody
     @RequestMapping("/update")
+    @SysLog("更新学生")
     public JsonResult update(Student student) {
         studentService.update(student);
         return JsonResult.renderSuccess("更新学生成功！", student.getId());

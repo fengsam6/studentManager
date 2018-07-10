@@ -78,7 +78,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     public void add(User user) {
         Assert.hasText(user.getUsername(), AppEnum.USER_NOT_NULL.getMsg());
         Assert.hasText(user.getPassword(), AppEnum.PASSWORD_NOT_NULL.getMsg());
-        user.setCreateTime(CommonUtil.getSystemDate("yyyy年MM月 hh:mm:ss"));
+        user.setCreateTime(CommonUtil.getSystemDate());
         User existUser = userMapper.getUsersByName(user.getUsername());
         if(existUser!=null){
             throw new BusinessException(AppEnum.USER_REPEAT.getErrorCode(), AppEnum.USER_REPEAT.getMsg());

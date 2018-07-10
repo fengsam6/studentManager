@@ -14,7 +14,7 @@ import java.util.Date;
 @TableName("tb_systemLog")
 public class SystemLog implements Serializable {
     private static final long serialVersionUID = 1L;
-    @TableId
+    @TableId(value="Id", type= IdType.AUTO)
     private Long id;
     //用户名
     private String username;
@@ -29,8 +29,8 @@ public class SystemLog implements Serializable {
     //IP地址
     private String ip;
     //创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createDate;
+
+    private String createDate;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -92,11 +92,11 @@ public class SystemLog implements Serializable {
         this.ip = ip;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 }

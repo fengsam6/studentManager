@@ -49,7 +49,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+        // toDo 判断角色权是否有权限访问，后期可能会用shiro处理
     }
 
     @Override

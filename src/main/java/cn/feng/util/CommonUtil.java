@@ -14,7 +14,7 @@ public class CommonUtil {
     }
     public static String getSystemDate(){
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月 hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
         return simpleDateFormat.format(date);
     }
 }

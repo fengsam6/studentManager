@@ -29,25 +29,29 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th><input type="checkbox"></th>
-            <th>学校名称</th>
-            <th>学校地址</th>
-            <th colspan="2">操作</th>
+            <th><input type="checkbox" name="ids"></th>
+            <th>用户名称</th>
+            <th>操作</th> 
+            <th>请求方法</th>
+            <th>参数</th>
+            <th>创建时间</th>
+            <th>执行时长</th>
+            <th>ip</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="school" items="${schoolPageInfo.list}">
+        <c:forEach var="systemLog" items="${systemLogPageInfo.list}">
             <tr>
-                <td><input type="checkbox"></td>
-                <td>${school.schoolName}</td>
-                <td>${school.address}</td>
-                <%--<td>--%>
-                    <%--<a href="javascript:void(0);"--%>
-                       <%--class="layui-btn  layui-btn-normal layui-btn-xs showPage_btn">查看</a>--%>
-                <%--</td>--%>
-
-                <td><a href="javascript:editPage(${school.schoolId});" class="layui-btn layui-btn-xs">编辑</a></td>
-                <td><a href="javascript:deteteSchool(${school.schoolId});"
+                <td><input type="checkbox" name="id" value="${systemLog.id}"></td>
+                <td>${systemLog.username}</td>
+                <td>${systemLog.operation}</td>
+                <td>${systemLog.method}</td>
+                <td>${systemLog.params}</td>
+                <td>${systemLog.createDate}</td>
+                <td>${systemLog.time}</td>
+                <td>${systemLog.ip}</td>
+                <td><a href="javascript:deteteSystemLog('/systemLog/delete',${systemLog.id});"
                        class="delete_btn layui-btn layui-btn-danger layui-btn-xs">删除</a>
                 </td>
             </tr>
@@ -68,8 +72,28 @@
     util.fixbar({
         bar1: false
     });
-
+$(".delAll_btn").click(function () {
+    var ids = $(":checked").value;
+    layer.confirm("确定删除该日志?", {icon: 3, title: '提示信息'}, function (index) {
+        $.ajax({
+            url: "/systemLog/deleteBatch",
+            data: {ids: ids},
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                console.log(data);
+                if (data.erroCode === 0) {
+                    layer.msg(data.msg, {icon: 1, time: 2000}, function () {
+                        window.location.reload()
+                    });
+                } else {
+                    layer.msg(data.msg, {icon: 5});
+                }
+            }
+        });
+    })
+})
 </script>
-<script src="${baseUrl}/static/js/school.js"></script>
+<script src="${baseUrl}/static/js/systemLog.js"></script>
 </body>
 </html>

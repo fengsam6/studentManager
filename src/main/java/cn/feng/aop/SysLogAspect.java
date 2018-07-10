@@ -5,6 +5,7 @@ import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.SystemLog;
 import cn.feng.entity.User;
 import cn.feng.service.SystemLogService;
+import cn.feng.util.CommonUtil;
 import cn.feng.util.HttpContextUtils;
 import cn.feng.util.IPUtils;
 import com.google.gson.Gson;
@@ -26,13 +27,14 @@ import java.util.Date;
  * Created by rf on 2018/7/8.
  */
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 
 public class SysLogAspect {
     @Autowired
     private SystemLogService sysLogService;
-private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Pointcut("@annotation(cn.feng.common.annotation.SysLog)")
     public void logPointCut() {
 
@@ -67,7 +69,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = signature.getName();
         sysLog.setMethod(className + "." + methodName + "()");
-
+        logger.info("{}", className + "." + methodName + "()");
         //请求的参数
         Object[] args = joinPoint.getArgs();
         try {
@@ -77,22 +79,22 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
             e.printStackTrace();
         }
 
-        //获取request
+//        //获取request
         HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-        //设置IP地址
+//        //设置IP地址
         sysLog.setIp(IPUtils.getIpAddr(request));
-
-        //用户名
-        User loginUser = (User) request.getSession().getAttribute("loginUser");
-        if(loginUser == null){
+        Object object = request.getSession().getAttribute("loginUser");
+        if (object == null) {
             logger.info("未登录");
             return;
         }
+        User loginUser = (User) object;
+
         String username = loginUser.getUsername();
         sysLog.setUsername(username);
 
         sysLog.setTime(time);
-        sysLog.setCreateDate(new Date());
+        sysLog.setCreateDate(CommonUtil.getSystemDate());
         //保存系统日志
         sysLogService.insert(sysLog);
     }

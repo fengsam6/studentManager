@@ -30,7 +30,7 @@ public class UsersDaoTest {
         user.setPassword("123456");
         user.setRoleId(1);
         user.setCreateTime(CommonUtil.getSystemDate("yyyy-MM-dd HH:mm:ss"));
-        userMapper.addUser(user);
+        userMapper.insert(user);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class UsersDaoTest {
 
     @Test
     public void findUsersById() throws Exception {
-        User user = userMapper.getUsersById(1);
+        User user = userMapper.selectById(1);
         System.out.println(user.toString());
         logger.info("{}", user);
     }

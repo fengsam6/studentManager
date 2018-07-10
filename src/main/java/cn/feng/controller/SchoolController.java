@@ -1,6 +1,7 @@
 package cn.feng.controller;
 
 
+import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.JsonResult;
 import cn.feng.entity.School;
 import cn.feng.service.SchoolService;
@@ -47,6 +48,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @SysLog("添加学校")
     public JsonResult add(School school) {
         schoolService.add(school);
         return JsonResult.renderSuccess("添加学校成功！");
@@ -54,6 +56,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping("/delete")
+    @SysLog("删除学校")
     public JsonResult delete(Integer id) {
         schoolService.deleteById(id);
         return JsonResult.renderSuccess("删除学校成功！", id);
@@ -61,6 +64,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping("/update")
+    @SysLog("更新学校")
     public JsonResult update(School school) {
         schoolService.update(school);
         return JsonResult.renderSuccess("更新学校成功！", school.getSchoolId());

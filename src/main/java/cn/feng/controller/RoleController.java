@@ -1,6 +1,7 @@
 package cn.feng.controller;
 
 
+import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.JsonResult;
 import cn.feng.entity.Role;
 import cn.feng.service.RoleService;
@@ -49,6 +50,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @SysLog("添加角色")
     public JsonResult add(Role role) {
         roleService.add(role);
         return JsonResult.renderSuccess("添加角色成功！");
@@ -56,6 +58,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/delete")
+    @SysLog("删除角色")
     public JsonResult delete(Integer id) {
         roleService.deleteById(id);
         return JsonResult.renderSuccess("删除角色成功！",id);
@@ -63,6 +66,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/update")
+    @SysLog("更新角色")
     public JsonResult update(Role role) {
         roleService.update(role);
         return JsonResult.renderSuccess("更新角色成功！",role.getId());

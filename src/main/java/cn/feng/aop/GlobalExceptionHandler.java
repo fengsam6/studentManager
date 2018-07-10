@@ -24,7 +24,6 @@ public class GlobalExceptionHandler {
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseBody
     public JsonResult handleIllegalArgument(IllegalArgumentException e) {
         logger.error("参数异常:{}\n", e.toString());
         e.printStackTrace();
@@ -33,7 +32,6 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ParamException.class)
-    @ResponseBody
     public JsonResult handleParamException(ParamException e) {
         logger.debug("参数解析失败:  {}\n", e.toString());
         e.printStackTrace();
@@ -43,7 +41,6 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(BusinessException.class)
-    @ResponseBody
     public JsonResult handleBusinessException(BusinessException e) {
         logger.debug("业务异常:  {}\n", e.toString());
         e.printStackTrace();
@@ -53,7 +50,6 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(Exception.class)
-    @ResponseBody
     public JsonResult handleException(Exception e) {
         logger.error("服务运行异常:{}\n", e.toString());
         e.printStackTrace();
@@ -65,9 +61,7 @@ public class GlobalExceptionHandler {
        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         logger.info("请求request: {}",request);
         HttpServletResponse response = HttpContextUtils.getHttpServletResponse();
-
         if (!AjaxRequestUtil.isAjaxRequest(HttpContextUtils.getHttpServletRequest())){
-
             logger.info("普通请求: {}",request.getRequestURI());
             try {
                 if(e instanceof IllegalArgumentException){

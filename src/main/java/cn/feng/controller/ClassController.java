@@ -1,6 +1,7 @@
 package cn.feng.controller;
 
 
+import cn.feng.common.annotation.SysLog;
 import cn.feng.entity.Class;
 import cn.feng.entity.JsonResult;
 import cn.feng.service.ClazzService;
@@ -48,6 +49,7 @@ public class ClassController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @SysLog("添加班级")
     public JsonResult add(Class classObj) {
         clazzService.add(classObj);
         return JsonResult.renderSuccess("添加班级成功！");
@@ -55,6 +57,7 @@ public class ClassController {
 
     @ResponseBody
     @RequestMapping("/delete")
+    @SysLog("删除班级")
     public JsonResult delete(Integer id) {
         clazzService.deleteById(id);
         return JsonResult.renderSuccess("删除班级成功！",id);
@@ -62,6 +65,7 @@ public class ClassController {
 
     @ResponseBody
     @RequestMapping("/update")
+    @SysLog("更新班级")
     public JsonResult update(Class classObj) {
         clazzService.update(classObj);
         return JsonResult.renderSuccess("更新班级成功！", classObj.getId());

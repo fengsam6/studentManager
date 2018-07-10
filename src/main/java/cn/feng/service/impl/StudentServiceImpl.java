@@ -26,10 +26,6 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentMapper, Student> 
     private StudentMapper studentMapper;
 
 
-    @Override
-    public Page<Student> selectUserPage(Page<Student> page, Integer state) {
-        return null;
-    }
 
     public PageInfo<Student> listPage(Integer pageNum, Integer pageSize, Student studentSearch) {
         //获取第1页，10条内容，默认查询总数count
@@ -45,21 +41,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentMapper, Student> 
         return new PageInfo<>(list);
     }
 
-    @Override
-    public PageInfo<StudentInfo> listPageByProc(Integer pageNum, Integer pageSize) {
-        if (pageNum == null) {
-            pageNum = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        PageHelper.startPage(pageNum, pageSize);
 
-//        紧跟着的第一个select方法会被分页
-        List<StudentInfo> list = studentMapper.getStudentInfoByProc();
-        /* 用PageInfo对结果进行包装 */
-        return new PageInfo<>(list);
-    }
 
     @Override
     public PageInfo<StudentInfo> listStudentInfoPage(Integer pageNum, Integer pageSize) {

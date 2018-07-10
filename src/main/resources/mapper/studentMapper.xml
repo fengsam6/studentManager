@@ -26,11 +26,7 @@
         </association>
     </resultMap>
 
-    <select id="listStudentInfo" statementType="CALLABLE" resultMap="studentInfoMap">
+    <select id="listStudentInfo"  resultMap="studentInfoMap">
         SELECT * from view_studentInfo
-    </select>
-
-    <select id="getStudentInfoByProc" statementType="CALLABLE" resultMap="studentInfoMap">
-        exec GeStudentInfo
     </select>
 </mapper>
