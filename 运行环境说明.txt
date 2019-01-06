@@ -1,0 +1,26 @@
+1、java运行环境
+下载java（建议版本1.8），设置jdk环境
+2、tomcat
+下载tomcat（建议版本7）
+3、maven
+配置maven镜像
+java集成开发工具（推荐IDEA，myeclipse也行）
+
+后端技术简单介绍
+SSM（spring、spring-mvc、mybatis）、mybatisPlus（配合mybatis，提供数据库CRUD封装）、pageHelper(数据库分页)
+
+数据库：SQLServer 2008
+
+
+前端技术
+1、界面layui(layer.js)
+2、jquery(ajax)
+
+运行：
+1、导入student.sql
+2、修改本地数据库连密码
+3、IDEA（挥着myeclipse）编译运行
+
+系统登录
+教师默认sam、123456
+管理员默认admin、123456

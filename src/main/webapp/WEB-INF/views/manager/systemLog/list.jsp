@@ -7,6 +7,12 @@
     <meta name="renderer" content="webkit">
     <link rel="stylesheet" href="${baseUrl}/static/plugins/layui/css/layui.css">
     <link rel="stylesheet" href="${baseUrl}/static/css/public.css">
+    <style>
+        #systemLogPage {
+            float: right;
+            margin: -2px 20px;
+        }
+    </style>
 </head>
 <body>
 <form class="layui-form">
@@ -19,9 +25,6 @@
                 <a class="layui-btn search_btn" data-type="reload">搜索</a>
             </div>
             <div class="layui-inline">
-                <a class="layui-btn layui-btn-normal addPage_btn" href="javascript:void(0);">添加学校</a>
-            </div>
-            <div class="layui-inline">
                 <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" href="javascript:void(0);">批量删除</a>
             </div>
         </form>
@@ -31,9 +34,9 @@
         <tr>
             <th><input type="checkbox" name="ids"></th>
             <th>用户名称</th>
-            <th>操作</th> 
+            <th>操作</th>
             <th>请求方法</th>
-            <th>参数</th>
+            <%--<th>参数</th>--%>
             <th>创建时间</th>
             <th>执行时长</th>
             <th>ip</th>
@@ -47,9 +50,9 @@
                 <td>${systemLog.username}</td>
                 <td>${systemLog.operation}</td>
                 <td>${systemLog.method}</td>
-                <td>${systemLog.params}</td>
+                <%--<td>${systemLog.params}</td>--%>
                 <td>${systemLog.createDate}</td>
-                <td>${systemLog.time}</td>
+                <td>${systemLog.time} 毫秒</td>
                 <td>${systemLog.ip}</td>
                 <td><a href="javascript:deteteSystemLog('/systemLog/delete',${systemLog.id});"
                        class="delete_btn layui-btn layui-btn-danger layui-btn-xs">删除</a>
@@ -60,6 +63,7 @@
     </table>
 
 </form>
+<div id="systemLogPage"></div>
 <script src="${baseUrl}/static/plugins/layui/layui.all.js"></script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -69,6 +73,7 @@
     var element = layui.element;
     var util = layui.util;
     var table = layui.table;
+    var laypage = layui.laypage;
     util.fixbar({
         bar1: false
     });
@@ -92,7 +97,27 @@ $(".delAll_btn").click(function () {
             }
         });
     })
-})
+});
+
+    laypage.render({
+        elem: 'systemLogPage', //注意，这里的 test1 是 ID，不用加 # 号
+        curr: ${systemLogPageInfo.pageNum}
+        , limit: ${systemLogPageInfo.pageSize},
+        limits: [10, 6, 8, 12, 14],
+        count: ${systemLogPageInfo.total} //数据总数，从服务端得到
+        , layout: ['prev', 'page', 'next', 'skip', 'count', 'limit'],
+        jump: function (obj, first) {
+            //obj包含了当前分页的所有参数，比如：
+            console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+            console.log(obj.limit); //得到每页显示的条数
+
+            //首次不执行
+            if (!first) {
+                //do something
+                window.location.href = "/systemLog/list.html?pageNum=" + obj.curr + "&pageSize=" + obj.limit
+            }
+        }
+    });
 </script>
 <script src="${baseUrl}/static/js/systemLog.js"></script>
 </body>
