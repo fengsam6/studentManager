@@ -22,23 +22,23 @@ SSM（spring、spring-mvc、mybatis）、mybatisPlus（和mybatis一起使用，
 
 2. 后台学生列表（可以设置每页显示几条数据）
 
-   ![AdminIndex](doc\运行效果图\AdminIndex.png)
+   ![AdminIndex](doc/运行效果图/AdminIndex.png)
 
 3. 添加学生
 
-   ![addSudent_success_info](doc\运行效果图\addSudent_success_info.png)
+   ![addSudent_success_info](doc/运行效果图/addSudent_success_info.png)
 
 4. 系统日志
 
-   ![systemLogList](doc\运行效果图\systemLogList.png)
+   ![systemLogList](doc/运行效果图/systemLogList.png)
 
 5. 编辑学生
 
-   ![editStudent](doc\运行效果图\editStudent.png)
+   ![editStudent](doc/运行效果图/editStudent.png)
 
 6. 用户列表
 
-   ![userList](doc\运行效果图\userList.png)
+   ![userList](doc/运行效果图/userList.png)
 
 
 #### 使用说明
