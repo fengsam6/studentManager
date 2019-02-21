@@ -7,7 +7,7 @@
 
 
     <select id="getUsersByName" parameterType="string" resultType="cn.feng.entity.User">
-        SELECT Id,username,password,role_id,create_time,last_login_time FROM [tb_user] WHERE username= #{username}
+        SELECT Id,username,password,role_id,create_time,last_login_time FROM tb_user WHERE username= #{username}
     </select>
 
     <resultMap id="userInfoMap" type="cn.feng.entity.UserInfo">

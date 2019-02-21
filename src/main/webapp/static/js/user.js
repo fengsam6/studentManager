@@ -1,6 +1,6 @@
 var layerIndex;
 function deteteUser(userId) {
-    layer.confirm("确定删除该学生?", {icon: 3, title: '提示信息'}, function (index) {
+    layer.confirm("确定删除该用户?", {icon: 3, title: '提示信息'}, function (index) {
         $.ajax({
             url: "/user/delete",
             data: {userId: userId},

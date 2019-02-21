@@ -12,7 +12,7 @@ ajax
 后端技术
 SSM（spring、spring-mvc、mybatis）、mybatisPlus（和mybatis一起使用，能够提供数据库基本、常用增删改查）、pageHelper（数据列表分页）、spring注解、全局异常控制。数据库，使用SQL server。
 
-###运行效果
+### 运行效果
 
 1. 登录界面（登录成功、失败都会有提示内容）
 
