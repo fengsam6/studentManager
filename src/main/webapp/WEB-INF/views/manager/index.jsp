@@ -110,21 +110,18 @@
     layTabPlus.init({
         lay_filter: 'layuiTab'
     });
-//    $(function () {
-//
-//        layTabPlus.addTab("/admin/welcome.html", "首页");
-//    });
+
     $(function () {
         $(".userLogout").click(function () {
             $.ajax({
-                url: "/user/logout",
+                url: "${baseUrl}/user/logout",
                 dataType: "json",
                 type: "post",
                 success: function (data) {
                     console.log(data);
                     if (data.erroCode === 0) {
                         layer.msg(data.msg, {icon: 1, time: 2000}, function () {
-                            window.location.href="/login.html"
+                            window.location.href="${baseUrl}/login.html"
                         });
                     } else {
                         layer.msg(data.msg, {icon: 5});
