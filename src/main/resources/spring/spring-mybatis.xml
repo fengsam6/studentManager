@@ -43,13 +43,7 @@
 		<property name="testOnReturn" value="false" />
 	</bean>
 
-	<!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-		<!--<property name="dataSource" ref="dataSource" />-->
-		<!--<property name="mapperLocations" value="classpath:/mapper/*Mapper.xml"/>-->
-		<!--<property name="configLocation" value="classpath:/config/mybatis-config.xml"/>-->
-	<!--</bean>-->
-	<!-- MyBatis SqlSessionFactoryBean 配置 -->
-	<!-- 注意：这里使用的是MP的MybatisSqlSessionFactoryBean,而不是Mybatis的,因为MP需要进行相应代理 -->
+
 	<bean id="sqlSessionFactory"
 		class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
 		<description>spring和MyBatis完美整合,不需要mybatis的配置映射文件</description>

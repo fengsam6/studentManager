@@ -54,7 +54,7 @@
                 <td>${systemLog.createDate}</td>
                 <td>${systemLog.time} 毫秒</td>
                 <td>${systemLog.ip}</td>
-                <td><a href="javascript:deteteSystemLog('/systemLog/delete',${systemLog.id});"
+                <td><a href="javascript:deteteSystemLog('${baseUrl}/systemLog/delete','${systemLog.id}');"
                        class="delete_btn layui-btn layui-btn-danger layui-btn-xs">删除</a>
                 </td>
             </tr>
@@ -114,7 +114,7 @@ $(".delAll_btn").click(function () {
             //首次不执行
             if (!first) {
                 //do something
-                window.location.href = "/systemLog/list.html?pageNum=" + obj.curr + "&pageSize=" + obj.limit
+                window.location.href = "${baseUrl}/systemLog/list.html?pageNum=" + obj.curr + "&pageSize=" + obj.limit
             }
         }
     });

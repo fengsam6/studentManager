@@ -52,7 +52,7 @@
                 <td>${school.schoolName}</td>
                 <td>${school.address}</td>
                 <td><a href="javascript:editPage(${school.schoolId});" class="layui-btn layui-btn-xs">编辑</a></td>
-                <td><a href="javascript:deteteSchool('/school/delete',${school.schoolId});"
+                <td><a href="javascript:deteteSchool('${baseUrl}/school/delete','${school.schoolId}');"
                        class="delete_btn layui-btn layui-btn-danger layui-btn-xs">删除</a>
                 </td>
             </tr>

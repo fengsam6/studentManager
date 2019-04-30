@@ -57,6 +57,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/system/getCaptcha"/>
             <mvc:exclude-mapping path="/login.html"/>
             <mvc:exclude-mapping path="/user/login"/>
             <mvc:exclude-mapping path="/static/**"/>
@@ -64,16 +65,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- 6.配置文件上传,如果没有使用文件上传可以不用配置,当然如果不配,那么配置文件中也不必引入上传组件包 -->
-    <!--<bean id="multipartResolver"  -->
-    <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  -->
-    <!--&lt;!&ndash; 默认编码 &ndash;&gt;-->
-    <!--<property name="defaultEncoding" value="utf-8" />  -->
-    <!--&lt;!&ndash; 文件大小最大值 &ndash;&gt;-->
-    <!--<property name="maxUploadSize" value="10485760000" />  -->
-    <!--&lt;!&ndash; 内存中的最大值 &ndash;&gt;-->
-    <!--<property name="maxInMemorySize" value="40960" />  -->
-    <!--</bean> -->
 
     <aop:aspectj-autoproxy/>
 </beans>

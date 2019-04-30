@@ -1,4 +1,4 @@
-package cn.feng.aop;
+package cn.feng.common.aop;
 
 
 import cn.feng.common.annotation.SysLog;
@@ -21,7 +21,6 @@ import org.aspectj.lang.annotation.Aspect;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Date;
 
 /**
  * Created by rf on 2018/7/8.

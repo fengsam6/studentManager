@@ -1,22 +1,18 @@
-package cn.feng.aop;
+package cn.feng.common.aop;
 
-import cn.feng.constant.AppEnum;
+import cn.feng.common.enums.AppErrorEnum;
 import cn.feng.entity.JsonResult;
-import cn.feng.exception.BusinessException;
-import cn.feng.exception.ParamException;
+import cn.feng.common.exception.BusinessException;
+import cn.feng.common.exception.ParamException;
 import cn.feng.util.AjaxRequestUtil;
 import cn.feng.util.HttpContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 
 @RestControllerAdvice
@@ -28,7 +24,7 @@ public class GlobalExceptionHandler {
         logger.error("参数异常:{}\n", e.toString());
         e.printStackTrace();
         notAjaxRequestHandler(e);
-        return JsonResult.renderError(AppEnum.BAD_PARAM.getErrorCode(), e.getMessage());
+        return JsonResult.renderError(AppErrorEnum.PARAM_INVALIDATE.setMsg(e.getMessage()));
     }
 
     @ExceptionHandler(ParamException.class)
@@ -36,7 +32,7 @@ public class GlobalExceptionHandler {
         logger.debug("参数解析失败:  {}\n", e.toString());
         e.printStackTrace();
         notAjaxRequestHandler(e);
-        return JsonResult.renderError(e.getErrorCode(), e.getMsg());
+        return JsonResult.renderError(e);
     }
 
 
@@ -45,7 +41,7 @@ public class GlobalExceptionHandler {
         logger.debug("业务异常:  {}\n", e.toString());
         e.printStackTrace();
         notAjaxRequestHandler(e);
-        return JsonResult.renderError(e.getErrorCode(), e.getMsg());
+        return JsonResult.renderError(e);
     }
 
 
@@ -67,7 +63,7 @@ public class GlobalExceptionHandler {
                 if(e instanceof IllegalArgumentException){
                     IllegalArgumentException exception = (IllegalArgumentException) e;
                     logger.error("请求错误！{}",e.toString());
-                    request.setAttribute("jsonResult",JsonResult.renderError(AppEnum.BAD_PARAM.getErrorCode(), exception.getMessage()));
+                    request.setAttribute("jsonResult",JsonResult.renderError(AppErrorEnum.PARAM_INVALIDATE.setMsg(e.getMessage())));
                     request.getRequestDispatcher("/illegalArgumentError.html").forward(request, response);
                 }else if(e instanceof BusinessException){
                     BusinessException exception = (BusinessException) e;

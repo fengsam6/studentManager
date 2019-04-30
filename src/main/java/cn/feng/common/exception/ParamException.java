@@ -1,4 +1,6 @@
-package cn.feng.exception;
+package cn.feng.common.exception;
+
+import cn.feng.common.error.CommonError;
 
 /**
  * Created by rf on 2018/6/15.
@@ -6,7 +8,8 @@ package cn.feng.exception;
 public class ParamException extends AppException {
     public ParamException(int errorCode, String msg) {
         super(errorCode, msg);
-        this.errorCode = errorCode;
-        this.msg = msg;
+    }
+    public ParamException(CommonError commonError) {
+        super(commonError);
     }
 }

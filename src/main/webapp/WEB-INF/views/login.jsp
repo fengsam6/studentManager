@@ -13,6 +13,9 @@
             display: block;
             background-color: #FF5722 !important;
         }
+       #captcha_img{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="loginBody">
@@ -26,12 +29,14 @@
     <div class="layui-form-item input-item">
         <label for="password">密码</label>
         <input type="password" placeholder="请输入密码" autocomplete="off" id="password" name="password" class="layui-input"
-               lay-verify="required" value="123456">
+               lay-verify="required" >
     </div>
     <div class="layui-form-item input-item" id="imgCode">
-        <label for="code">验证码</label>
-        <input type="text" placeholder="请输入验证码" autocomplete="off" id="code" class="layui-input">
-        <img src="${baseUrl}/static/img/code.jpg">
+        <label for="inputCode">验证码</label>
+            <input type="text" placeholder="请输入验证码" autocomplete="off" id="inputCode" class="layui-input" name="code">
+    </div>
+    <div class="layui-form-item input-item" >
+        <img src="${baseUrl}/system/getCaptcha" id="captcha_img" onclick="refreshCode()">
     </div>
     <div class="layui-form-item">
         <button class="layui-btn layui-block login_btn" lay-filter="login" type="button">登录</button>
@@ -45,8 +50,14 @@
 
     var layer = layui.layer;
     var element = layui.element;
-
+    function refreshCode() {
+        console.log("update code");
+        $('#captcha_img').attr("src", "${baseUrl}/system/getCaptcha?" + Math.random());
+    }
     $(function () {
+
+
+        layer.msg("学生管理系统测试版，登录账号admin，<br/>密码123456", {icon: 6, time: 3500});
         $(".login_btn").click(function () {
             var userForm = $(".userForm");
             $.ajax({
@@ -62,6 +73,7 @@
                         });
                     } else {
                         layer.msg(data.msg, {icon: 5});
+                        refreshCode();
                     }
                 }
             })

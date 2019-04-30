@@ -1,19 +1,17 @@
-package cn.feng.exception;
+package cn.feng.common.exception;
 
+
+import cn.feng.common.error.CommonError;
 
 /**
  * Created by rf on 2018/6/15.
  */
-public class AppException extends RuntimeException {
+public class AppException extends RuntimeException implements CommonError{
     protected int errorCode;
     protected String msg;
 
     public int getErrorCode() {
         return errorCode;
-    }
-
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
     }
 
     public String getMsg() {
@@ -28,5 +26,8 @@ public class AppException extends RuntimeException {
         super(msg);
         this.errorCode = errorCode;
         this.msg = msg;
+    }
+    public AppException(CommonError commonError) {
+        this(commonError.getErrorCode(),commonError.getMsg());
     }
 }

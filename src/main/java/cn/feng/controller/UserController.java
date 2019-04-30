@@ -2,21 +2,28 @@ package cn.feng.controller;
 
 
 import cn.feng.common.annotation.SysLog;
+import cn.feng.common.enums.AppErrorEnum;
+import cn.feng.common.exception.BusinessException;
 import cn.feng.entity.JsonResult;
 import cn.feng.entity.Role;
 import cn.feng.entity.User;
 import cn.feng.entity.UserInfo;
+import cn.feng.common.exception.ParamException;
 import cn.feng.service.RoleService;
 import cn.feng.service.UserService;
 import cn.feng.util.CommonUtil;
 import com.github.pagehelper.PageInfo;
+import com.google.code.kaptcha.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -86,7 +93,11 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/update")
     @SysLog("更新用户")
-    public JsonResult update(User user) {
+    public JsonResult update(@Valid User user, BindingResult result) {
+        if(result.hasErrors()){
+           String errorMsg = result.getFieldError().getDefaultMessage();
+            throw new ParamException(AppErrorEnum.PARAM_INVALIDATE.setMsg(errorMsg));
+        }
         userService.update(user);
         return JsonResult.renderSuccess("更新用户成功！");
     }
@@ -94,22 +105,26 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     @SysLog("用户登录")
-    public JsonResult login(User user, HttpServletRequest request) {
+    public JsonResult login(User user,String code, HttpServletRequest request) {
+       String trueCode = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+       if(!StringUtils.hasLength(code)||!code.trim().equals(trueCode)){
+           throw new BusinessException(AppErrorEnum.CODE_ERROR);
+       }
         User loginUser = userService.login(user);
        Role role = roleService.selectById(loginUser.getRoleId());
         request.getSession().setAttribute("userRole", role);
         request.getSession().setAttribute("loginUser", loginUser);
         //修改登录时间
         loginUser.setLastLoginTime(CommonUtil.getSystemDate("yyyy年MM月 hh:mm:ss"));
-        userService.update(loginUser);
+        userService.updateById(loginUser);
         return JsonResult.renderSuccess("登录成功！", user);
     }
 
     @ResponseBody
     @RequestMapping("/logout")
     @SysLog("用户退出登录")
-    public JsonResult logout(User user, HttpServletRequest request) {
+    public JsonResult logout(HttpServletRequest request) {
       request.getSession().invalidate();
-        return JsonResult.renderSuccess("退出成功！", user);
+        return JsonResult.renderSuccess("退出成功！");
     }
 }

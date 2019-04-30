@@ -1,5 +1,7 @@
 package cn.feng.entity;
 
+import cn.feng.common.error.CommonError;
+
 /**
  * Created by rf on 2018/6/15.
  */
@@ -45,6 +47,7 @@ public class JsonResult {
         jsonResult.data = data;
         return jsonResult;
     }
+
     public static JsonResult renderSuccess(String msg){
         JsonResult jsonResult = new JsonResult();
         jsonResult.erroCode =0;
@@ -53,12 +56,11 @@ public class JsonResult {
     }
 
     public static JsonResult renderError(int erroCode,String msg){
-        JsonResult jsonResult = new JsonResult();
-        jsonResult.erroCode =erroCode;
-        jsonResult.msg = msg;
-        return jsonResult;
+        return renderError(erroCode,msg,null);
     }
-
+    public static JsonResult renderError(CommonError commonError){
+        return renderError(commonError.getErrorCode(),commonError.getMsg());
+    }
     public static JsonResult renderError(int erroCode,String msg,Object data){
         JsonResult jsonResult = new JsonResult();
         jsonResult.erroCode =erroCode;

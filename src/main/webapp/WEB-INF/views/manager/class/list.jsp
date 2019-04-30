@@ -47,7 +47,7 @@
                        class="layui-btn  layui-btn-normal layui-btn-xs showPage_btn">查看</a></td>
 
                 <td><a href="javascript:editPage(${classObj.id});" class="layui-btn layui-btn-xs ">编辑</a></td>
-                <td><a href="javascript:deteteClass('${baseUrl}/class/delete',${classObj.id});"
+                <td><a href="javascript:deteteClass('${baseUrl}/class/delete','${classObj.id}');"
                        class="delete_btn layui-btn layui-btn-danger layui-btn-xs">删除</a>
                 </td>
             </tr>

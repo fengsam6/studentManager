@@ -165,13 +165,13 @@ INSERT INTO `tb_user` VALUES ('2', 'admin2', '', '1146464', '2', '2019年02月21
 INSERT INTO `tb_user` VALUES ('3', 'test', '', '123456', '1', '2019年02月21日 04:46:43', '2019年02月 05:17:54');
 
 -- ----------------------------
--- View structure for view_studentinfo
+-- View structure for view_studentInfo
 -- ----------------------------
-DROP VIEW IF EXISTS `view_studentinfo`;
+DROP VIEW IF EXISTS `view_studentInfo`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_studentinfo` AS select `s`.`Id` AS `Id`,`s`.`student_name` AS `student_name`,`s`.`student_num` AS `student_num`,`s`.`gender` AS `gender`,`s`.`major` AS `major`,`s`.`email` AS `email`,`s`.`enter_school_time` AS `enter_school_time`,`s`.`phone` AS `phone`,`s`.`aver_path` AS `aver_path`,`s`.`class_id` AS `class_id`,`s`.`school_id` AS `school_id`,`c`.`class_name` AS `class_name`,`sc`.`school_name` AS `school_name` from ((`tb_student` `s` join `tb_class` `c` on((`s`.`class_id` = `c`.`Id`))) join `tb_school` `sc` on((`s`.`school_id` = `sc`.`school_id`))) ;
 
 -- ----------------------------
--- View structure for view_userinfo
+-- View structure for view_userInfo
 -- ----------------------------
-DROP VIEW IF EXISTS `view_userinfo`;
+DROP VIEW IF EXISTS `view_userInfo`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_userinfo` AS select `u`.`Id` AS `Id`,`u`.`username` AS `username`,`u`.`num` AS `num`,`u`.`password` AS `password`,`u`.`role_id` AS `role_id`,`u`.`create_time` AS `create_time`,`u`.`last_login_time` AS `last_login_time`,`r`.`role_name` AS `role_name` from (`tb_user` `u` join `tb_role` `r` on((`u`.`role_id` = `r`.`id`))) ;

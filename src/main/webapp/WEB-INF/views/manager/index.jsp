@@ -35,38 +35,49 @@
             <ul class="layui-nav layui-nav-tree" lay-filter="layuiTab">
                 <li class="layui-nav-item"><a href="javascript:void(0);">学生管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/student/listStudentInfo.html">学生列表</a></dd>
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/student/add.html">添加学生</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/student/listStudentInfo.html">学生列表</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/student/add.html">添加学生</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:void(0);">班级管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/class/list.html">班级列表</a></dd>
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/class/add.html">添加班级</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/class/list.html">班级列表</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/class/add.html">添加班级</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:void(0);">学校管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/school/list.html">学校列表</a></dd>
-                        <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/school/add.html">添加学校</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/school/list.html">学校列表</a></dd>
+                        <dd><a href="javascript:void(0);" class="layTabPlus"
+                               tab_url="${baseUrl}/school/add.html">添加学校</a></dd>
                     </dl>
                 </li>
                 <%--管理员才能访问--%>
                 <c:if test="${loginUser.roleId>2}">
                     <li class="layui-nav-item"><a href="javascript:void(0);">用户管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/user/listUserInfo.html">用户列表</a></dd>
-                            <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/user/add.html">添加用户</a></dd>
+                            <dd><a href="javascript:void(0);" class="layTabPlus"
+                                   tab_url="${baseUrl}/user/listUserInfo.html">用户列表</a></dd>
+                            <dd><a href="javascript:void(0);" class="layTabPlus"
+                                   tab_url="${baseUrl}/user/add.html">添加用户</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item"><a href="javascript:void(0);">角色管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/role/list.html">角色列表</a></dd>
-                            <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/role/add.html">添加角色</a></dd>
+                            <dd><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/role/list.html">角色列表</a>
+                            </dd>
+                            <dd><a href="javascript:void(0);" class="layTabPlus"
+                                   tab_url="${baseUrl}/role/add.html">添加角色</a></dd>
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item"><a href="javascript:void(0);" class="layTabPlus" tab_url="${baseUrl}/systemLog/list.html">日志管理</a></li>
+                    <li class="layui-nav-item"><a href="javascript:void(0);" class="layTabPlus"
+                                                  tab_url="${baseUrl}/systemLog/list.html">日志管理</a></li>
                 </c:if>
 
             </ul>
@@ -85,9 +96,10 @@
         </div>
     </div>
 
-    <div class="layui-footer">
+    <div class="layui-footer" >
         <!-- 底部固定区域 -->
-       学生信息管理 copyright @rf拥有
+        <a href="http://118.89.228.250/student/">学生信息管理</a> copyright @rf拥有
+        <span >欢迎访问<a href="https://gitee.com/fengsam618/studentManager">学生信息管理码云地址</a></span>
     </div>
 </div>
 <script src="${baseUrl}/static/plugins/layui/layui.all.js"></script>
@@ -121,7 +133,7 @@
                     console.log(data);
                     if (data.erroCode === 0) {
                         layer.msg(data.msg, {icon: 1, time: 2000}, function () {
-                            window.location.href="${baseUrl}/login.html"
+                            window.location.href = "${baseUrl}/login.html"
                         });
                     } else {
                         layer.msg(data.msg, {icon: 5});

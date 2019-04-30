@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by rf on 2017/9/15.
  */
@@ -12,8 +15,10 @@ import com.baomidou.mybatisplus.enums.IdType;
 public class User {
     @TableId(value="Id", type= IdType.AUTO)
     private Integer id;//
+    @NotBlank(message = "用户名不能为空")
     private String username;//用户名
     private Integer num;
+    @NotBlank(message = "密码不能为空")
     private String password;//用户密码
     private Integer roleId;//角色id
     private String createTime;
